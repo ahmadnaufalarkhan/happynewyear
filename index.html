@@ -47,7 +47,6 @@
             width: 100%; font-weight: 500; transition: 0.3s;
         }
 
-        /* CONTAINER SPAM - Disebar ke seluruh layar */
         #spam-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             display: none; z-index: 1500; background: #fdfcfb;
@@ -55,7 +54,7 @@
         }
 
         .spam-img {
-            position: absolute; width: 130px; height: 130px; /* Ukuran sedikit diperkecil agar tidak terlalu penuh */
+            position: absolute; width: 130px; height: 130px;
             object-fit: cover; border: 4px solid white;
             border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.15);
             animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
@@ -82,6 +81,33 @@
         .content { line-height: 1.8; color: #555; text-align: justify; font-size: 1rem; margin-bottom: 30px; }
         .footer { margin-top: 20px; color: #8e735b; line-height: 1.6; }
         .footer-main { font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 1.2rem; display: block; margin-bottom: 5px; }
+
+        /* Style Tombol YouTube */
+        .yt-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #b08d79;
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(176,141,121,0.4);
+            transition: all 0.3s ease;
+        }
+        .yt-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(176,141,121,0.6);
+            background: #9c7b69;
+        }
+        .yt-button svg {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
 
         .hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .heart { position: absolute; background-color: rgba(176, 141, 121, 0.2); width: 10px; height: 10px; border-radius: 50%; animation: fall linear infinite; }
@@ -121,6 +147,14 @@
                 <br>
                 <center>
                     <img src="https://wsrv.nl/?url=https://drive.google.com/uc?id=1wgDGr73An-rMjAe2uQ7SRout4Ze32pkW" class="photo-1-1" style="width: 220px; height: 220px; margin-top: 25px;">
+                    
+                    <div style="margin-top: 30px;">
+                        <p style="font-size: 0.95rem; color: #8e735b; font-style: italic; margin-bottom: 5px;">P.S.: Dengerin juga ya..</p>
+                        <a href="https://www.youtube.com/watch?v=tGv7CUutzqU" target="_blank" class="yt-button">
+                            <svg viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                            "About You"
+                        </a>
+                    </div>
                 </center>
             </div>
         </div>
@@ -185,24 +219,21 @@
                     img.src = `https://wsrv.nl/?url=https://drive.google.com/uc?id=${randomID}`;
                     img.className = 'spam-img';
 
-                    // PENYEBARAN GAMBAR:
-                    // Menggunakan range yang lebih luas (-5% sampai 85%) agar foto menyebar ke pinggir
                     const top = Math.random() * 90 - 5; 
                     const left = Math.random() * 90 - 5;
-                    const rot = (Math.random() * 60) - 30; // Rotasi lebih variatif (-30 sampai 30)
+                    const rot = (Math.random() * 60) - 30;
 
                     img.style.top = top + "%";
                     img.style.left = left + "%";
                     img.style.setProperty('--r', rot + "deg");
                     
-                    // Variasi ukuran kecil (opsional)
-                    const size = Math.random() * 40 + 110; // Ukuran random antara 110px - 150px
+                    const size = Math.random() * 40 + 110;
                     img.style.width = size + "px";
                     img.style.height = size + "px";
 
                     spamBox.appendChild(img);
                     counter++;
-                }, 60); // Kecepatan sedikit diperlambat agar mata bisa mengikuti sebaran
+                }, 60);
             }, 500);
         }
 
