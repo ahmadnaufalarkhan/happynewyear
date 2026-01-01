@@ -69,7 +69,7 @@
 
         #main-content {
             display: none; width: 100%; justify-content: center;
-            opacity: 0; transition: opacity 1s ease-in; padding: 40px 0;
+            opacity: 0; transition: opacity 1.5s ease-in; padding: 40px 0;
         }
 
         .container {
@@ -81,12 +81,23 @@
 
         h1 { font-family: 'Dancing Script', cursive; color: #b08d79; font-size: 2.5rem; margin-bottom: 20px; }
         
-        .content { 
-            line-height: 1.8; color: #555; text-align: justify; 
-            font-size: 1rem; margin-bottom: 30px; min-height: 200px; 
+        /* Gaya Transisi Teks Baru */
+        .message-p {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease-out;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
         }
 
-        .footer { margin-top: 20px; color: #8e735b; line-height: 1.6; opacity: 0; transition: 1s; }
+        .message-p.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .footer { margin-top: 20px; color: #8e735b; line-height: 1.6; opacity: 0; transition: 1.5s; }
         .footer-main { font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 1.2rem; display: block; margin-bottom: 5px; }
 
         .yt-button {
@@ -126,7 +137,13 @@
         <div class="music-notes" id="notes"></div>
         <div class="container">
             <h1 id="title-name">Dear, J...</h1>
-            <div class="content" id="typing-text"></div>
+            
+            <div id="text-container">
+                <p class="message-p">Sebelumnya maaf banget kalo baru bilang sekarang. Di sini aku mau minta maaf kalau selama aku kenal kamu satu dua tahun ke belakang aku ngasih feedback yang kurang baik ke kamu.</p>
+                <p class="message-p">Bukannya aku nggak suka, malah aku suka banget ada seseorang yang ngelakuin hal kayak giving present, perhatiin hal-hal kecil, marah kalau aku ngobrol sama cewe lain. Itu pertama kalinya buat aku ada yang perhatian kayak gitu.</p>
+                <p class="message-p">Tapi karena itu juga aku bingung harus ngapain. Aku takut kalau aku ngelakuin ini itu bakal buat kamu terganggu, karena perasaan itu aku jadi respon kayak gitu. Tapi karena ini juga aku masih ada perasaan yang ganjel.</p>
+                <p class="message-p">Maka dari itu di sini aku mau bilang kalau aku ada perasaan suka sama kamu. Maaf juga baru bisa ngungkapin sekarang. Makasi ya udah baca long text ini hihi.</p>
+            </div>
             
             <div class="footer" id="footer-content">
                 <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
@@ -148,8 +165,6 @@
     </div>
 
     <script>
-        const fullMessage = "Sebelumnya maaf banget kalo baru bilang sekarang. Di sini aku mau minta maaf kalau selama aku kenal kamu satu dua tahun ke belakang aku ngasih feedback yang kurang baik ke kamu.\n\nBukannya aku nggak suka, malah aku suka banget ada seseorang yang ngelakuin hal kayak giving present, perhatiin hal-hal kecil, marah kalau aku ngobrol sama cewe lain. Itu pertama kalinya buat aku ada yang perhatian kayak gitu.\n\nTapi karena itu juga aku bingung harus ngapain. Aku takut kalau aku ngelakuin ini itu bakal buat kamu terganggu, karena perasaan itu aku jadi respon kayak gitu. Tapi karena ini juga aku masih ada perasaan yang ganjel.\n\nMaka dari itu di sini aku mau bilang kalau aku ada perasaan suka sama kamu. Maaf juga baru bisa ngungkapin sekarang. Makasi ya udah baca long text ini hihi.";
-
         const photoIDs = ["1PYN836q7kHwVSWsjk07aLo006J1-zb44", "1HkMvhWWzWCZ5b1-hSg1N6gH4ZquKqXp4", "1tlLumpzwJr4W0jOq5ij4F9IQd8eWto4p", "1BfpBib5k0TGJGP6Sg9QOrxBHkYigFETB", "1kXQoW7LS0NqFPE_Ctp0cjSMt2iMXzcQT", "1u2eIe5KafGUb3LckP6Av_q3-nhs0JOzZ", "1PlgwWhnKZmOWJYeRZ_cmsY_-CEQPL2Tu", "1Qmn8jtrrnl55crXlnH7Bkb0uNpfWv6Ed", "1pTPlCN8919KAx_d8aNfQwT_ZSpL4Dc94", "1SEKnPuGKauFxFGYY80mG3kNg0S2q5xrV"];
 
         function checkPassword() {
@@ -169,7 +184,7 @@
                 spamBox.style.display = "block";
                 
                 let counter = 0;
-                const totalPhotos = 100; // Jumlah foto diperbanyak jadi 100
+                const totalPhotos = 100;
                 
                 const interval = setInterval(() => {
                     if (counter >= totalPhotos) {
@@ -182,16 +197,16 @@
                                 mainContent.style.display = "flex";
                                 setTimeout(() => { 
                                     mainContent.style.opacity = "1"; 
-                                    startTyping();
+                                    revealMessages(); // Panggil transisi teks
                                     startFloatingElements();
-                                }, 50);
+                                }, 100);
                             }, 1200);
-                        }, 1500); // Jeda layar penuh sedikit lebih lama biar puas liat fotonya
+                        }, 1500);
                         return;
                     }
                     createSpamImg(spamBox);
                     counter++;
-                }, 30); // Kecepatan muncul dipercepat (30ms)
+                }, 30);
             }, 500);
         }
 
@@ -199,36 +214,30 @@
             const img = document.createElement('img');
             img.src = `https://wsrv.nl/?url=https://drive.google.com/uc?id=${photoIDs[Math.floor(Math.random() * photoIDs.length)]}`;
             img.className = 'spam-img';
-            
-            // Penyebaran lebih luas hingga ke pinggir layar
             img.style.top = (Math.random() * 100 - 5) + "%";
             img.style.left = (Math.random() * 100 - 5) + "%";
-            
-            // Ukuran foto acak agar menutup celah lebih baik
-            const size = Math.random() * 80 + 120; // 120px sampai 200px
+            const size = Math.random() * 80 + 120;
             img.style.width = size + "px";
             img.style.height = size + "px";
-            
             img.style.setProperty('--r', (Math.random() * 60 - 30) + "deg");
-            img.style.zIndex = box.children.length; // Foto baru selalu di depan
-            
+            img.style.zIndex = box.children.length;
             box.appendChild(img);
         }
 
-        function startTyping() {
-            const element = document.getElementById("typing-text");
-            let i = 0;
-            function type() {
-                if (i < fullMessage.length) {
-                    if (fullMessage.charAt(i) === "\n") { element.innerHTML += "<br>"; } 
-                    else { element.innerHTML += fullMessage.charAt(i); }
-                    i++;
-                    setTimeout(type, 15);
-                } else {
-                    document.getElementById("footer-content").style.opacity = "1";
-                }
-            }
-            type();
+        // Fungsi Transisi Teks Baru (Fade-In Up per paragraf)
+        function revealMessages() {
+            const paragraphs = document.querySelectorAll('.message-p');
+            paragraphs.forEach((p, index) => {
+                setTimeout(() => {
+                    p.classList.add('show');
+                    // Jika paragraf terakhir sudah muncul, tampilkan footer
+                    if (index === paragraphs.length - 1) {
+                        setTimeout(() => {
+                            document.getElementById("footer-content").style.opacity = "1";
+                        }, 1000);
+                    }
+                }, index * 1200); // Jeda 1.2 detik antar paragraf
+            });
         }
 
         function startFloatingElements() {
