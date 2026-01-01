@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@300;400;500;700&display=swap');
+
+        body {
+            margin: 0; padding: 0;
+            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            font-family: 'Quicksand', sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; overflow-x: hidden;
+        }
+
+        #password-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #e2d1c3; display: flex; justify-content: center;
+            align-items: center; z-index: 2000; transition: 0.5s;
+        }
+
+        .pass-card {
+            background: white; padding: 30px; border-radius: 20px;
+            text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: flex; flex-direction: column; align-items: center;
+            width: 80%; max-width: 320px;
+        }
+
+        .photo-1-1 {
+            width: 180px; height: 180px; object-fit: cover;
+            border-radius: 15px; margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            background: #f0f0f0; border: 3px solid #fff;
+        }
+
+        .pass-card input {
+            padding: 12px; border-radius: 8px; border: 1px solid #ddd;
+            margin: 15px 0 10px 0; text-align: center; width: 100%;
+            box-sizing: border-box; outline: none; font-family: 'Quicksand';
+        }
+
+        .pass-card button {
+            padding: 10px 30px; background: #b08d79; color: white;
+            border: none; border-radius: 8px; cursor: pointer;
+            width: 100%; font-weight: 500; transition: 0.3s;
+        }
+
+        /* CONTAINER SPAM - Disebar ke seluruh layar */
+        #spam-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            display: none; z-index: 1500; background: #fdfcfb;
+            overflow: hidden;
+        }
+
+        .spam-img {
+            position: absolute; width: 130px; height: 130px; /* Ukuran sedikit diperkecil agar tidak terlalu penuh */
+            object-fit: cover; border: 4px solid white;
+            border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0) rotate(-15deg); opacity: 0; }
+            100% { transform: scale(1) rotate(var(--r)); opacity: 1; }
+        }
+
+        #main-content {
+            display: none; width: 100%; justify-content: center;
+            opacity: 0; transition: opacity 1s ease-in; padding: 40px 0;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px);
+            padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 500px; width: 90%; text-align: center;
+            position: relative; z-index: 1; border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        h1 { font-family: 'Dancing Script', cursive; color: #b08d79; font-size: 2.5rem; margin-bottom: 20px; }
+        .content { line-height: 1.8; color: #555; text-align: justify; font-size: 1rem; margin-bottom: 30px; }
+        .footer { margin-top: 20px; color: #8e735b; line-height: 1.6; }
+        .footer-main { font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 1.2rem; display: block; margin-bottom: 5px; }
+
+        .hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .heart { position: absolute; background-color: rgba(176, 141, 121, 0.2); width: 10px; height: 10px; border-radius: 50%; animation: fall linear infinite; }
+        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div id="password-overlay">
+        <div class="pass-card">
+            <p style="font-size: 0.85rem; color: #888; margin: 0;">Passwordnya masukin dulu</p>
+            <input type="password" id="inputPass" placeholder="...">
+            <button onclick="checkPassword()">Masuk</button>
+            <p id="error" style="color: red; font-size: 0.8rem; display: none; margin-top: 10px;">Password salah TT</p>
+            <img src="https://wsrv.nl/?url=https://drive.google.com/uc?id=1UVGAj9_ulZ74LD3IlvycFnqyVIkpBCIt" class="photo-1-1" alt="Foto">
+        </div>
+    </div>
+
+    <div id="spam-container"></div>
+
+    <div id="main-content">
+        <div class="hearts" id="hearts"></div>
+        <div class="container">
+            <h1>Dear, J...</h1>
+            <div class="content">
+                <p>Sebelumnya maaf banget kalo baru bilang sekarang. Di sini aku mau minta maaf kalau selama aku kenal kamu satu dua tahun ke belakang aku ngasih feedback yang kurang baik ke kamu.</p>
+                <p>Bukannya aku nggak suka, malah aku suka banget ada seseorang yang ngelakuin hal kayak giving present, perhatiin hal-hal kecil, marah kalau aku ngobrol sama cewe lain. Itu pertama kalinya buat aku ada yang perhatian kayak gitu.</p>
+                <p>Tapi karena itu juga aku bingung harus ngapain. Aku takut kalau aku ngelakuin ini itu bakal buat kamu terganggu, karena perasaan itu aku jadi respon kayak gitu. Tapi karena ini juga aku masih ada perasaan yang ganjel.</p>
+                <p>Maka dari itu di sini aku mau bilang kalau aku ada perasaan suka sama kamu. Maaf juga baru bisa ngungkapin sekarang. Makasi ya udah baca long text ini hihi.</p>
+            </div>
+            
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+            
+            <div class="footer">
+                <span class="footer-main">Selamat Tahun Baru & Selamat Ulang Tahun.</span>
+                <span style="font-size: 1rem; font-weight: 400;">Best birthday wishes for you ⸜(｡˃ ᵕ ˂ )⸝♡</span>
+                <br>
+                <center>
+                    <img src="https://wsrv.nl/?url=https://drive.google.com/uc?id=1wgDGr73An-rMjAe2uQ7SRout4Ze32pkW" class="photo-1-1" style="width: 220px; height: 220px; margin-top: 25px;">
+                </center>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const photoIDs = [
+            "1PYN836q7kHwVSWsjk07aLo006J1-zb44",
+            "1HkMvhWWzWCZ5b1-hSg1N6gH4ZquKqXp4",
+            "1tlLumpzwJr4W0jOq5ij4F9IQd8eWto4p",
+            "1BfpBib5k0TGJGP6Sg9QOrxBHkYigFETB",
+            "1kXQoW7LS0NqFPE_Ctp0cjSMt2iMXzcQT",
+            "1u2eIe5KafGUb3LckP6Av_q3-nhs0JOzZ",
+            "1PlgwWhnKZmOWJYeRZ_cmsY_-CEQPL2Tu",
+            "1Qmn8jtrrnl55crXlnH7Bkb0uNpfWv6Ed",
+            "1pTPlCN8919KAx_d8aNfQwT_ZSpL4Dc94",
+            "1SEKnPuGKauFxFGYY80mG3kNg0S2q5xrV"
+        ];
+
+        function checkPassword() {
+            const pass = document.getElementById('inputPass').value;
+            const passwordBenar = "01012026"; 
+
+            if (pass === passwordBenar) {
+                runSpamEffect();
+            } else {
+                document.getElementById('error').style.display = "block";
+            }
+        }
+
+        function runSpamEffect() {
+            const overlay = document.getElementById('password-overlay');
+            const spamBox = document.getElementById('spam-container');
+            const mainContent = document.getElementById('main-content');
+
+            overlay.style.opacity = "0";
+            setTimeout(() => {
+                overlay.style.display = "none";
+                spamBox.style.display = "block";
+
+                let counter = 0;
+                const totalSpam = 30;
+
+                const interval = setInterval(() => {
+                    if (counter >= totalSpam) {
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            spamBox.style.opacity = "0";
+                            spamBox.style.transition = "1s";
+                            setTimeout(() => {
+                                spamBox.style.display = "none";
+                                mainContent.style.display = "flex";
+                                setTimeout(() => { mainContent.style.opacity = "1"; }, 50);
+                                startHearts();
+                            }, 1000);
+                        }, 1200);
+                        return;
+                    }
+
+                    const img = document.createElement('img');
+                    const randomID = photoIDs[Math.floor(Math.random() * photoIDs.length)];
+                    img.src = `https://wsrv.nl/?url=https://drive.google.com/uc?id=${randomID}`;
+                    img.className = 'spam-img';
+
+                    // PENYEBARAN GAMBAR:
+                    // Menggunakan range yang lebih luas (-5% sampai 85%) agar foto menyebar ke pinggir
+                    const top = Math.random() * 90 - 5; 
+                    const left = Math.random() * 90 - 5;
+                    const rot = (Math.random() * 60) - 30; // Rotasi lebih variatif (-30 sampai 30)
+
+                    img.style.top = top + "%";
+                    img.style.left = left + "%";
+                    img.style.setProperty('--r', rot + "deg");
+                    
+                    // Variasi ukuran kecil (opsional)
+                    const size = Math.random() * 40 + 110; // Ukuran random antara 110px - 150px
+                    img.style.width = size + "px";
+                    img.style.height = size + "px";
+
+                    spamBox.appendChild(img);
+                    counter++;
+                }, 60); // Kecepatan sedikit diperlambat agar mata bisa mengikuti sebaran
+            }, 500);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            heart.style.width = heart.style.height = Math.random() * 15 + 5 + "px";
+            const hBox = document.getElementById('hearts');
+            if(hBox) hBox.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+
+        function startHearts() { setInterval(createHeart, 300); }
+    </script>
+</body>
+</html>
